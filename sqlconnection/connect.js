@@ -1,11 +1,14 @@
-const { Client } = require('pg');
+const Pool = require('pg').Pool;
 
 
 
 //Client configuration
     // configuration for production
 const prodConfig = {
-    connectionString:process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+      }
 }
 
     // configuration for development
@@ -18,7 +21,7 @@ const devConfig = {
 }
 
 //process.env.NODE_ENV === 'production'?prodConfig:devConfig
-const client = new Client(prodConfig);
+const client = new Pool(prodConfig);
 
 // connect to the database
 client.connect();
