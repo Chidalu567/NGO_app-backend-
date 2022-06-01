@@ -14,12 +14,12 @@ const newsletterRouter = require('./router/handleEmail');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); //configure bodyparser for easy access to form data
 
-    // cross-origin-resource sharing configuration in nodejs
-// app.use(cors({
-//     origin: ['http://localhost:3000'],
-//     methods: ['POST'],
-//     optionsSuccessStatus: 200
-// }));
+    //cross-origin-resource sharing configuration in nodejs
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    methods: ['POST'],
+    optionsSuccessStatus: 200
+}));
 
     // web security using helmetjs
 app.use(helmet.xssFilter()); // avoid xss
