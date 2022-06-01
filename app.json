@@ -1,8 +1,0 @@
-{
-    "env": {
-        "SECRET_TOKEN": {
-            "EMAIL_PASSWORD": "SirPhilip@123",
-            "EMAIL_USERNAME": "sirphiliporganization@gmail.com"
-        }
-    }
-}

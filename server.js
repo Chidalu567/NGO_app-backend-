@@ -30,7 +30,6 @@ app.use(helmet.contentSecurityPolicy());
     // external Routers
 app.use('/api/', newsletterRouter);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, "localhost", () => {
-    console.log(`Server running on port: ${PORT}`);
+app.listen(process.env.PORT || 5000, "localhost", () => {
+    console.log(`Server running on port <from server>: ${process.env.PORT}`);
 });
