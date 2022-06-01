@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
-// const client = require('../sqlconnection/connect');
-// const mailingAgent = require('../utils/mailingAgent');
+const client = require('../sqlconnection/connect');
+const mailingAgent = require('../utils/mailingAgent');
 
 // configure dotenv
 dotenv.config();
@@ -29,21 +29,21 @@ exports.mail = async (req, res) => {
                 //send newsletter to email of user
                 mailingAgent({ email: subscribeUser.rows.user_email });
 
-                res.status(200).json({ msg: `${subscribeUser.rows.user_email} stored successfully` }); // send json response
+                res.status(200).json({ stored: `${subscribeUser.rows.user_email} stored successfully` }); // send json response
                 res.end(); // end response
 
             } else { // email exist already
 
                 //show message that email exist already in database
                 mailingAgent({ email: email }); // send newsletter again to user
-                res.status(200).json({ msg: `${email} is subscribed already` });
+                res.status(200).json({ Email_exist: `${email} is subscribed already` });
                 res.end();
             }
         } catch (err) {
             console.log(err.stack);
         }
     } else {
-        res.status(200).json({ error: "Enter your Mail" }); // send json response to frontend
+        res.status(200).json({ no_mail: "Enter your Mail" }); // send json response to frontend
         res.end(); // end response
     }
 
