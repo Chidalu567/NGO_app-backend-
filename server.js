@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false })); //configure bodyparser for eas
 
     //cross-origin-resource sharing configuration in nodejs
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000','https://ngo-application-fcr03h16z-chidalu567.vercel.app'],
     methods: ['POST'],
     optionsSuccessStatus: 200
 }));
