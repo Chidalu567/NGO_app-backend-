@@ -5,7 +5,7 @@ const { Client } = require('pg');
 //Client configuration
     // configuration for production
 const prodConfig = {
-    connectionString:process.env.DATABASE_URL
+    connectionString:process.env.DATABASE_URL,
 }
 
     // configuration for development
@@ -17,7 +17,8 @@ const devConfig = {
     database:"subscribe"
 }
 
-const client = new Client(process.env.NODE_ENV === 'production'?prodConfig:devConfig);
+//process.env.NODE_ENV === 'production'?prodConfig:devConfig
+const client = new Client(prodConfig);
 
 // connect to the database
 client.connect();
