@@ -27,9 +27,9 @@ exports.mail = async (req, res) => {
                 const subscribeUser = await client.query('INSERT INTO subscribeduser(email) VALUES($1) RETURNING *', [email]);
 
                 //send newsletter to email of user
-                mailingAgent({ email: subscribeUser.rows.user_email });
+                mailingAgent({ email:email });
 
-                res.status(200).json({ stored: `${subscribeUser.rows.user_email} stored successfully` }); // send json response
+                res.status(200).json({ stored: `${email} stored successfully` }); // send json response
                 res.end(); // end response
 
             } else { // email exist already
