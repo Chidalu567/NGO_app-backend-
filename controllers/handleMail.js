@@ -18,13 +18,13 @@ exports.mail = async (req, res) => {
         try {
 
             // Check if email exist already in database
-            const result = await client.query('SELECT user_email FROM subscribeduser WHERE user_email = $1', [email]);
+            const result = await client.query('SELECT email FROM subscribeduser WHERE email = $1', [email]);
 
             //check email does not exist
             if (result.rows.length === 0) {
 
                 //insert the new email into the database
-                const subscribeUser = await client.query('INSERT INTO subscribeduser(user_email) VALUES($1) RETURNING *', [email]);
+                const subscribeUser = await client.query('INSERT INTO subscribeduser(email) VALUES($1) RETURNING *', [email]);
 
                 //send newsletter to email of user
                 mailingAgent({ email: subscribeUser.rows.user_email });
