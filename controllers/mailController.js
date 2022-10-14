@@ -7,10 +7,11 @@ dotenv.config();
 
 
 // Router controller created to extend the router function
-exports.mail = async (req, res) => {
+exports.mailController = async (req, res) => {
 
     // collect value from the request
     const { email } = req.body;
+
 
     if (email) {
 
