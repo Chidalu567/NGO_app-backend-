@@ -1,8 +1,17 @@
-const axios = require('axios')
+const axios = require('axios');
+const mailmodel = require('../model/mailModel');
 
 exports.checkoutHandler = async (req, res) => {
     // collect client details
-    const { name, email, country, amount,phone } = req.body;
+    const { name, email, country, amount, phone } = req.body;
+
+    // check if email in database if not save email and phone number and name
+    const emailExist = await mailmodel.findOne({ email: email });
+    if (emailExist) {
+        const updateUser = await mailmodel.updateOne({ email: email }, { phonenumber: Number(phone) });
+    } else {
+        const createUser = await mailmodel.insertOne({ email: email, phonenumber: Number(phone) });
+    }
 
     // convert the amount to NGN
     const getFinalAmount = () => {

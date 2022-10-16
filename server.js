@@ -3,9 +3,19 @@ const app = express(); // create an express application
 const cors = require('cors'); // require cors from nodemodules
 const helmet = require('helmet'); // require helmet libnary from node modules
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+
 
     //configure access to environmental variables
 dotenv.config();// configure with env variables
+
+
+    // mongodb database cluster connection
+mongoose.connect("mongodb+srv://fortune:Godchild@cluster0.gg9tlfa.mongodb.net/FortCodex?retryWrites=true&w=majority").then(() => {
+    console.log("Connected to database cluster");
+}).catch(err => {
+    console.log("Error connecting to database cluster");
+})
 
     //external Router
 const newsletterRouter = require('./router/handleEmail');

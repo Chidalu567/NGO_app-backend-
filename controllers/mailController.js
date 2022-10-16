@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 const client = require('../sqlconnection/connect');
 const mailingAgent = require('../utils/mailingAgent');
+const Mailmodel = require("../model/mailModel");
 
 // configure dotenv
 dotenv.config();
@@ -8,44 +9,26 @@ dotenv.config();
 
 // Router controller created to extend the router function
 exports.mailController = async (req, res) => {
-
-    // collect value from the request
+    // get the customer information
     const { email } = req.body;
 
 
-    if (email) {
-
-        // try block to catch errors
-        try {
-
-            // Check if email exist already in database
-            const result = await client.query('SELECT email FROM subscribeduser WHERE email = $1', [email]);
-
-            //check email does not exist
-            if (result.rows.length === 0) {
-
-                //insert the new email into the database
-                const subscribeUser = await client.query('INSERT INTO subscribeduser(email) VALUES($1) RETURNING *', [email]);
-
-                //send newsletter to email of user
-                mailingAgent({ email:email });
-
-                res.status(200).json({ stored: `${email} stored successfully` }); // send json response
-                res.end(); // end response
-
-            } else { // email exist already
-
-                //show message that email exist already in database
-                mailingAgent({ email: email }); // send newsletter again to user
-                res.status(200).json({ Email_exist: `${email} is subscribed already` });
-                res.end();
-            }
-        } catch (err) {
-            console.log(err.stack);
-        }
+    // check if email exist in database
+    const emailExist = await Mailmodel.findOne({ email: email });
+    if (emailExist) {
+        // send a different mail to user stating that we have them in our system
+        // send response to client that email exist
+        res.status(200).json({ info:"We would notify you for any new event from SirPhilip" , loading:"Checking for your registration",success:"You registered previously, we have you in our system"});
     } else {
-        res.status(200).json({ no_mail: "Enter your Mail" }); // send json response to frontend
-        res.end(); // end response
-    }
+        // store email in database
+        const storeEmail = await Mailmodel.insertMany({ email: email });
+        console.log("From mailController -> ", "User created successfully", storeEmail);
 
+        // send a mail to the new user welcoming them to the system
+        const sendMail = mailingAgent(email);
+
+        // send response to user that email stored already
+        res.status(200).json({info:"We would notify you for any new event from SirPhilip",loading:"Checking your registration",success:`Congrats!!!, You have subscribed to our newletter.` });
+
+    }
 }
