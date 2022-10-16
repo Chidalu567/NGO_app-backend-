@@ -21,7 +21,7 @@ const devConfig = {
 }
 
 //process.env.NODE_ENV === 'production'?prodConfig:devConfig
-const client = new Pool(prodConfig);
+const client = new Pool(devConfig);
 
 // connect to the database
 client.connect();

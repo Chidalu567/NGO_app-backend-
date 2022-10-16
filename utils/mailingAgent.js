@@ -13,8 +13,8 @@ const transporter = nodemailer.createTransport({
     secure: true,
     port: 465,
     auth: {
-        user: email_address,
-        pass: password
+        user: `${email_address}`,
+        pass: `${password}`
     }
 });
 
@@ -23,16 +23,16 @@ const transporter = nodemailer.createTransport({
 // Function that send mail
 const MailingAgent = async(param) => {
     // check if param is not false
-    if (param.email) {
+    if (param) {
             //mail object
         const mailOptions = {
             from: `<${email_address}>`,
-            to: `${param.email}`,
-            subject: "Registration to Sir Philip Organization",
+            to: `${param}`,
+            subject: "Warm Welcome",
             html: "<html><head><title>Sir Philip Organization Registration</title><body><h2>Registration Successful</h2><p>Dear Registered user, Bear with us as we are still improving our mailiing template. Your data is stored in our database and we would notify on every event. Thanks</p></body></head></html>",
         }
         const info = await transporter.sendMail(mailOptions);
-        console.log(info);
+        return info;
     }
 }
 
