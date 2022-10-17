@@ -42,10 +42,7 @@ app.use(helmet.contentSecurityPolicy());
 app.use('/api', newsletterRouter);
 app.use('/api', checkoutRouter);
 
-    // Port number
-const port = process.env.PORT || 5000;
-
     // listen to post
-app.listen(port, () => {
-    console.log(`Server running on port <from server...>: ${port}`);
+app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server running on port <from server...> ${process.env.PORT}`);
 });
