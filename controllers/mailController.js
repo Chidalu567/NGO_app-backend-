@@ -1,5 +1,4 @@
 const dotenv = require('dotenv');
-const client = require('../sqlconnection/connect');
 const mailingAgent = require('../utils/mailingAgent');
 const Mailmodel = require("../model/mailModel");
 
