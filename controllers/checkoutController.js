@@ -6,10 +6,13 @@ exports.checkoutHandler = async (req, res) => {
     const { name, email, country, amount, phone } = req.body;
 
     // check if email in database if not save email and phone number and name
+    const phoneExist = await mailmodel.findOne({ phonenumber: phone });
     const emailExist = await mailmodel.findOne({ email: email });
-    if (emailExist) {
+    if (emailExist && !phoneExist) {
         const updateUser = await mailmodel.updateOne({ email: email }, { phonenumber: phone });
-    } else {
+    }
+
+    if(!emailExist && !phoneExist){
         const createUser = await mailmodel.insertMany({ email: email, phonenumber:phone });
     }
 
