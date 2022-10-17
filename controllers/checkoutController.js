@@ -29,7 +29,7 @@ exports.checkoutHandler = async (req, res) => {
             phonenumber:phone,
         },
         currency: "NGN",
-        redirect_url: "https://www.sirphilip.org/",
+        redirect_url: "https://www.spamfoundation.org/",
         payment_options: "card",
         amount:`${getFinalAmount()}`,
     }
