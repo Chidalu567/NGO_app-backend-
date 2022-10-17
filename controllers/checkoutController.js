@@ -5,13 +5,7 @@ exports.checkoutHandler = async (req, res) => {
     // collect client details
     const { name, email, country, amount, phone } = req.body;
 
-    // check if email in database if not save email and phone number and name
-    const phoneExist = await mailmodel.findOne({ phonenumber: phone });
-    const nameExist = await mailmodel.findOne({ username: name });
 
-    if (!phoneExist && !nameExist) {
-        const createUser = await mailmodel.insertMany({ username: name, phonenumber: phone });
-    }
     // convert the amount to NGN
     const getFinalAmount = () => {
         if (country === "AUS") {
