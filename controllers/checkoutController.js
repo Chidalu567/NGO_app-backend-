@@ -36,7 +36,7 @@ exports.checkoutHandler = async (req, res) => {
             phonenumber:phone,
         },
         currency: "NGN",
-        redirect_url: "http://localhost:3000",
+        redirect_url: "https://ngo-application.vercel.app/",
         payment_options: "card",
         amount:`${getFinalAmount()}`,
     }
