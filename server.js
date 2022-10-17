@@ -44,5 +44,5 @@ app.use('/api', checkoutRouter);
 
     // listen to post
 app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server running on port <from server...>`);
+    console.log(`Server running on port <from server...> ${process.env.PORT}`);
 });
