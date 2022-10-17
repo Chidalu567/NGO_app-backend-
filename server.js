@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false })); //configure bodyparser for eas
 
     //cross-origin-resource sharing configuration in nodejs
 app.use(cors({
-    origin:['https://ngo-application.vercel.app'],
+    origin:['https://www.sirphilip.org'],
     methods: ['POST','GET'],
     optionsSuccessStatus: 200
 }));
