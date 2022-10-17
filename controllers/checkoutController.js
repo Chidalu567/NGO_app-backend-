@@ -8,9 +8,9 @@ exports.checkoutHandler = async (req, res) => {
     // check if email in database if not save email and phone number and name
     const emailExist = await mailmodel.findOne({ email: email });
     if (emailExist) {
-        const updateUser = await mailmodel.updateOne({ email: email }, { phonenumber: Number(phone) });
+        const updateUser = await mailmodel.updateOne({ email: email }, { phonenumber: phone });
     } else {
-        const createUser = await mailmodel.insertOne({ email: email, phonenumber: Number(phone) });
+        const createUser = await mailmodel.insertMany({ email: email, phonenumber:phone });
     }
 
     // convert the amount to NGN
