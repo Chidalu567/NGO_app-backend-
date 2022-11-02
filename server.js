@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false })); //configure bodyparser for eas
 
     //cross-origin-resource sharing configuration in nodejs
 app.use(cors({
-    origin:['https://www.spamfoundation.org',"http://localhost:3000"],
+    origin:['https://www.spamfoundation.org',"http://localhost:3000","https://sporg.herokuapp.com"],
     methods: ['POST','GET'],
     optionsSuccessStatus: 200
 }));
