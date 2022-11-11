@@ -22,6 +22,8 @@ mongoose.connect("mongodb+srv://fortune:Godchild@cluster0.gg9tlfa.mongodb.net/Fo
     //external Router
 const newsletterRouter = require('./router/handleEmail');
 const checkoutRouter = require('./router/handleCheckout');
+const adminRouter = require('./router/adminRouter');
+const frontgalleryRouter = require('./router/frontgalleryRouter');
 
     // middlewares
 app.use(express.json());
@@ -29,8 +31,8 @@ app.use(express.urlencoded({ extended: false })); //configure bodyparser for eas
 
     //cross-origin-resource sharing configuration in nodejs
 app.use(cors({
-    origin:['https://www.spamfoundation.org',"http://localhost:3000","https://sporg.herokuapp.com"],
-    methods: ['POST','GET'],
+    origin:['https://www.spamfoundation.org',"http://localhost:3000","https://sporg.herokuapp.com","https://www.sirphilip.org"],
+    methods: ['POST','GET','UPDATE','DELETE'],
     optionsSuccessStatus: 200
 }));
 
@@ -43,6 +45,8 @@ app.use(helmet.contentSecurityPolicy());
     // external Routers
 app.use('/api', newsletterRouter);
 app.use('/api', checkoutRouter);
+app.use('/api', frontgalleryRouter);
+app.use('/api/admin', adminRouter);
 
     // create swagger configuration
 const options = {
