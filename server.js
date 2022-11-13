@@ -26,8 +26,8 @@ const adminRouter = require('./router/adminRouter');
 const frontgalleryRouter = require('./router/frontgalleryRouter');
 
     // middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: false })); //configure bodyparser for easy access to form data
+app.use(express.json({limit:'50mb'}));
+app.use(express.urlencoded({ extended: false,limit:'50mb' })); //configure bodyparser for easy access to form data
 
     //cross-origin-resource sharing configuration in nodejs
 app.use(cors({
