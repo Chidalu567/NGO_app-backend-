@@ -6,7 +6,7 @@ exports.galleryHandler = async (req, res) => {
 
     // create and upload image to the cloud -> cloudinary -> folder(spam_gallery)
     try {
-        const uploadFile = await cloudinary.uploader.upload(file, { folder: 'spam_gallery' });
+        const uploadFile = await cloudinary.uploader.upload(file, { upload_preset: 'ngo-admin-preset' });
         console.log(uploadFile.public_id);
 
         // store the title, description, date, public_id in airtable
