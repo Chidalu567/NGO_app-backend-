@@ -4,4 +4,6 @@ const c = require('../controllers/adminController');
 
 router.post('/gallery', c.galleryHandler);
 
+
+
 module.exports = router;
